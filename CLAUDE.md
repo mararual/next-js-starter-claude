@@ -8,7 +8,7 @@ This guide outlines the development approach for building a Next.js application 
 - **Acceptance Test Driven Development (ATDD)** - BDD scenarios inform acceptance tests
 - **Test Driven Development (TDD)** - Write tests before implementation
 - **Functional Programming (FP)** - Pure functions, immutability, composition
-- **JavaScript** - No TypeScript, vanilla JS only
+- **TypeScript** - Strict mode enabled, type-safe development with Next.js
 
 ## Philosophy
 
