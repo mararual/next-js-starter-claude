@@ -1,0 +1,105 @@
+name: Release Please
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows: ['CI Flow']
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  # Determine if this workflow should run based on trigger type
+  check-trigger:
+    name: Check Trigger
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+      is_release_commit: ${{ steps.check.outputs.is_release_commit }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Determine if workflow should run
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # On push event, check if this is a release commit
+            COMMIT_MSG=$(git log -1 --pretty=%B)
+            COMMIT_AUTHOR=$(git log -1 --pretty=%an)
+
+            if echo "$COMMIT_MSG" | grep -q "^chore(main): release"; then
+              echo "Release-please commit detected on push - running immediately"
+              echo "should_run=true" >> $GITHUB_OUTPUT
+              echo "is_release_commit=true" >> $GITHUB_OUTPUT
+            elif [ "$COMMIT_AUTHOR" = "github-actions[bot]" ] && echo "$COMMIT_MSG" | grep -q "release"; then
+              echo "Release commit detected on push - running immediately"
+              echo "should_run=true" >> $GITHUB_OUTPUT
+              echo "is_release_commit=true" >> $GITHUB_OUTPUT
+            else
+              echo "Normal commit on push - skipping (will wait for CI to complete)"
+              echo "should_run=false" >> $GITHUB_OUTPUT
+              echo "is_release_commit=false" >> $GITHUB_OUTPUT
+            fi
+          elif [ "${{ github.event_name }}" = "workflow_run" ]; then
+            # Triggered by CI completion - only run if CI succeeded
+            if [ "${{ github.event.workflow_run.conclusion }}" = "success" ]; then
+              echo "CI succeeded - running release-please"
+              echo "should_run=true" >> $GITHUB_OUTPUT
+              echo "is_release_commit=false" >> $GITHUB_OUTPUT
+            else
+              echo "CI failed, was cancelled, or was skipped - not running release-please"
+              echo "should_run=false" >> $GITHUB_OUTPUT
+              echo "is_release_commit=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            # Manual trigger or other event
+            echo "Manual trigger - running release-please"
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "is_release_commit=false" >> $GITHUB_OUTPUT
+          fi
+
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+    needs: check-trigger
+    if: needs.check-trigger.outputs.should_run == 'true'
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # No target-branch: creates Release PR on main
+
+      # Checkout repository for subsequent steps
+      - name: Checkout
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches
+
+      # Update release branch when Release PR is merged
+      - name: Update release branch
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Fetch latest
+          git fetch origin main
+          git fetch origin release || true
+
+          # Force update release branch to match main
+          git checkout -B release origin/main
+          git push origin release --force
