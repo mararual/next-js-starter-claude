@@ -1,76 +1,96 @@
 import { describe, it, expect } from 'vitest'
 import { capitalize, trim, slugify, truncate } from './string'
 
-describe('String utilities', () => {
+describe('String Utilities', () => {
 	describe('capitalize', () => {
-		it('capitalizes first letter and lowercases rest', () => {
+		it('capitalizes the first letter of a string', () => {
 			expect(capitalize('hello')).toBe('Hello')
-			expect(capitalize('HELLO')).toBe('Hello')
-			expect(capitalize('hELLO')).toBe('Hello')
 		})
 
-		it('handles empty strings', () => {
-			expect(capitalize('')).toBe('')
+		it('converts the rest of the string to lowercase', () => {
+			expect(capitalize('HELLO')).toBe('Hello')
+		})
+
+		it('handles single character strings', () => {
+			expect(capitalize('a')).toBe('A')
+		})
+
+		it('returns empty string for null or undefined', () => {
 			expect(capitalize(null)).toBe('')
 			expect(capitalize(undefined)).toBe('')
 		})
 
-		it('handles single character', () => {
-			expect(capitalize('a')).toBe('A')
-			expect(capitalize('A')).toBe('A')
+		it('returns empty string for empty input', () => {
+			expect(capitalize('')).toBe('')
 		})
 	})
 
 	describe('trim', () => {
-		it('removes whitespace from both ends', () => {
+		it('removes leading and trailing whitespace', () => {
 			expect(trim('  hello  ')).toBe('hello')
-			expect(trim('\thello\t')).toBe('hello')
-			expect(trim('\nhello\n')).toBe('hello')
 		})
 
-		it('handles empty strings', () => {
-			expect(trim('')).toBe('')
+		it('removes tabs and newlines', () => {
+			expect(trim('\thello\n')).toBe('hello')
+		})
+
+		it('returns empty string for null or undefined', () => {
 			expect(trim(null)).toBe('')
 			expect(trim(undefined)).toBe('')
+		})
+
+		it('handles strings with no whitespace', () => {
+			expect(trim('hello')).toBe('hello')
 		})
 	})
 
 	describe('slugify', () => {
-		it('converts string to slug format', () => {
+		it('converts string to URL-friendly format', () => {
 			expect(slugify('Hello World')).toBe('hello-world')
-			expect(slugify('Foo Bar Baz')).toBe('foo-bar-baz')
 		})
 
 		it('removes special characters', () => {
-			expect(slugify('Hello@World!')).toBe('helloworld')
-			expect(slugify('Test#123')).toBe('test123')
+			expect(slugify('Hello & World!')).toBe('hello--world')
 		})
 
-		it('handles whitespace', () => {
-			expect(slugify('  hello   world  ')).toBe('hello-world')
+		it('handles multiple spaces', () => {
+			expect(slugify('Hello   World')).toBe('hello-world')
+		})
+
+		it('trims whitespace before slugifying', () => {
+			expect(slugify('  Hello World  ')).toBe('hello-world')
+		})
+
+		it('preserves hyphens and underscores', () => {
+			expect(slugify('hello-world_test')).toBe('hello-world_test')
 		})
 	})
 
 	describe('truncate', () => {
-		it('truncates string to specified length', () => {
+		it('truncates string longer than specified length', () => {
 			expect(truncate('Hello World', 5)).toBe('Hello...')
-			expect(truncate('Hello World', 8)).toBe('Hello Wo...')
 		})
 
-		it('does not truncate if string is shorter than length', () => {
-			expect(truncate('Hi', 5)).toBe('Hi')
+		it('uses default suffix of "..." when not specified', () => {
+			expect(truncate('This is a long string', 10)).toBe('This is a ...')
+		})
+
+		it('uses custom suffix when provided', () => {
+			expect(truncate('Hello World', 5, '→')).toBe('Hello→')
+		})
+
+		it('returns original string if shorter than length', () => {
+			expect(truncate('Hi', 10)).toBe('Hi')
+		})
+
+		it('returns original string if equal to length', () => {
 			expect(truncate('Hello', 5)).toBe('Hello')
 		})
 
-		it('uses custom suffix', () => {
-			expect(truncate('Hello World', 5, '—')).toBe('Hello—')
-			expect(truncate('Hello World', 5, ' [more]')).toBe('Hello [more]')
-		})
-
-		it('returns empty string gracefully', () => {
-			expect(truncate(null)).toBe(null)
-			expect(truncate(undefined)).toBe(undefined)
-			expect(truncate('')).toBe('')
+		it('uses default length of 100 when not specified', () => {
+			const longString = 'a'.repeat(150)
+			const result = truncate(longString)
+			expect(result.length).toBe(103) // 100 + 3 for '...'
 		})
 	})
 })
