@@ -1,6 +1,6 @@
 # Branch Strategy & Protection Rules
 
-This document describes the branching strategy and GitHub branch protection rules for the Interactive CD project.
+This document describes the branching strategy and GitHub branch protection rules for the NextJS Starter Claude project.
 
 ---
 
