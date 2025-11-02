@@ -40,21 +40,21 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm start` | Start production server |
-| `npm test` | Run unit tests (Vitest) |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:ui` | Run tests with UI dashboard |
-| `npm run test:coverage` | Generate coverage report |
-| `npm run test:e2e` | Run E2E tests (Playwright) |
-| `npm run test:e2e:ui` | Run E2E tests with UI |
-| `npm run lint` | Check code style |
-| `npm run lint:fix` | Auto-fix code style |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check formatting |
+| Command                 | Description                 |
+| ----------------------- | --------------------------- |
+| `npm run dev`           | Start development server    |
+| `npm run build`         | Build for production        |
+| `npm start`             | Start production server     |
+| `npm test`              | Run unit tests (Vitest)     |
+| `npm run test:watch`    | Run tests in watch mode     |
+| `npm run test:ui`       | Run tests with UI dashboard |
+| `npm run test:coverage` | Generate coverage report    |
+| `npm run test:e2e`      | Run E2E tests (Playwright)  |
+| `npm run test:e2e:ui`   | Run E2E tests with UI       |
+| `npm run lint`          | Check code style            |
+| `npm run lint:fix`      | Auto-fix code style         |
+| `npm run format`        | Format code with Prettier   |
+| `npm run format:check`  | Check formatting            |
 
 ## Development Workflow
 
@@ -165,29 +165,31 @@ nextjs-starter-claude/
 ### Example
 
 **Pure Function:**
+
 ```javascript
 // ✅ Good - pure function
-export const capitalize = (str) => {
+export const capitalize = str => {
 	if (!str) return ''
 	return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 // ❌ Bad - side effects
 let result = ''
-export const capitalize = (str) => {
-	result = str.toUpperCase()  // Side effect!
+export const capitalize = str => {
+	result = str.toUpperCase() // Side effect!
 	return result
 }
 ```
 
 **Immutability:**
+
 ```javascript
 // ✅ Good - immutable
 const addUser = (users, user) => [...users, user]
 
 // ❌ Bad - mutating
 const addUser = (users, user) => {
-	users.push(user)  // Mutation!
+	users.push(user) // Mutation!
 	return users
 }
 ```
@@ -203,6 +205,7 @@ cp .env.example .env.local
 ```
 
 Available variables:
+
 - `NEXT_PUBLIC_API_URL` - API endpoint
 - `NEXT_PUBLIC_FEATURE_NEW_UI` - Feature flag
 - `NEXT_PUBLIC_ANALYTICS_ID` - Analytics tracking ID
@@ -210,6 +213,7 @@ Available variables:
 ### Tailwind CSS
 
 Customize in `tailwind.config.js`:
+
 - Colors
 - Spacing
 - Typography
@@ -218,12 +222,14 @@ Customize in `tailwind.config.js`:
 ### ESLint & Prettier
 
 Configure code style in:
+
 - `.eslintrc.json` - Linting rules
 - `.prettierrc.json` - Code formatting
 
 ### Git Hooks
 
 Husky runs git hooks:
+
 - Pre-commit: lint and format
 - Commit-msg: validate conventional commits
 
@@ -236,6 +242,7 @@ This project uses **Trunk-Based Development** with automatic deployment from the
 #### Setup (One-Time)
 
 1. **Connect to Vercel**
+
    ```bash
    # Option 1: Via GitHub (Recommended)
    # Go to vercel.com, click "New Project", select your repository
@@ -371,6 +378,7 @@ PWDEBUG=1 npm run test:e2e
 This project uses **Trunk-Based Development** with a single `main` branch.
 
 **Workflow:**
+
 1. Create feature branch from `main`
 2. Write BDD features and tests
 3. Implement code
@@ -392,6 +400,7 @@ git commit -m "test: add user authentication tests"
 ```
 
 **Commit types:**
+
 - `feat` - New feature
 - `fix` - Bug fix
 - `docs` - Documentation
@@ -403,6 +412,7 @@ git commit -m "test: add user authentication tests"
 - `ci` - CI/CD changes
 
 **Branch naming:**
+
 - `feat/feature-name` - New features
 - `fix/bug-name` - Bug fixes
 - `docs/what-changed` - Documentation

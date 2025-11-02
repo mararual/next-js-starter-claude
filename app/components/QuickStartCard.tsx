@@ -11,12 +11,7 @@ const titleColorMap = {
 	pink: 'text-pink-400'
 }
 
-export function QuickStartCard({
-	title,
-	titleColor,
-	command,
-	description
-}: QuickStartCardProps) {
+export function QuickStartCard({ title, titleColor, command, description }: QuickStartCardProps) {
 	return (
 		<div>
 			<h3 className={`text-lg font-semibold mb-3 ${titleColorMap[titleColor]}`}>{title}</h3>

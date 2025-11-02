@@ -5,17 +5,20 @@ This is a complete, clean Next.js starter template ready for development with **
 ## What's Included
 
 ### Core Framework
+
 - ✅ **Next.js 14** with React 19
 - ✅ **Tailwind CSS** for styling
 - ✅ **TypeScript** configuration (optional, can be used with JS)
 
 ### Testing Setup
+
 - ✅ **Vitest** for unit tests
 - ✅ **Playwright** for E2E tests
 - ✅ **@testing-library/react** for component testing
 - ✅ Test configuration files ready to use
 
 ### Code Quality
+
 - ✅ **ESLint** configured with Next.js rules
 - ✅ **Prettier** for code formatting
 - ✅ **Husky** git hooks
@@ -115,22 +118,27 @@ npm run format
 This starter follows **BDD → ATDD → TDD** methodology:
 
 ### 1. Write BDD Features
+
 - Create feature files in `docs/features/` using Gherkin syntax
 - Define user behavior in human-readable scenarios
 
 ### 2. Write ATDD Tests
+
 - Create E2E tests in `tests/e2e/` using Playwright
 - Test acceptance criteria from feature files
 
 ### 3. Write TDD Tests
+
 - Create unit tests in `src/**/*.test.js`
 - Test individual functions and components
 
 ### 4. Implement Code
+
 - Write minimal code to make tests pass
 - Keep functions pure and components simple
 
 ### 5. Refactor
+
 - Improve code quality while keeping tests green
 - Extract reusable patterns
 
@@ -178,7 +186,7 @@ describe('increment', () => {
 ### 4. Implement Code (`src/utils/counter.js`)
 
 ```javascript
-export const increment = (value) => value + 1
+export const increment = value => value + 1
 ```
 
 ### 5. Use in Component (`app/page.js`)
@@ -195,10 +203,7 @@ export default function Home() {
 	return (
 		<div>
 			<p data-testid="count">{count}</p>
-			<button
-				data-testid="increment"
-				onClick={() => setCount(increment)}
-			>
+			<button data-testid="increment" onClick={() => setCount(increment)}>
 				Increment
 			</button>
 		</div>
@@ -208,21 +213,21 @@ export default function Home() {
 
 ## Available Scripts
 
-| Script | Purpose |
-|--------|---------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm start` | Run production server |
-| `npm test` | Run unit tests |
-| `npm run test:watch` | Watch mode for tests |
-| `npm run test:ui` | Interactive test UI |
+| Script                  | Purpose                  |
+| ----------------------- | ------------------------ |
+| `npm run dev`           | Start development server |
+| `npm run build`         | Build for production     |
+| `npm start`             | Run production server    |
+| `npm test`              | Run unit tests           |
+| `npm run test:watch`    | Watch mode for tests     |
+| `npm run test:ui`       | Interactive test UI      |
 | `npm run test:coverage` | Generate coverage report |
-| `npm run test:e2e` | Run E2E tests |
-| `npm run test:e2e:ui` | Interactive E2E UI |
-| `npm run lint` | Check code style |
-| `npm run lint:fix` | Auto-fix style |
-| `npm run format` | Format code |
-| `npm run format:check` | Check formatting |
+| `npm run test:e2e`      | Run E2E tests            |
+| `npm run test:e2e:ui`   | Interactive E2E UI       |
+| `npm run lint`          | Check code style         |
+| `npm run lint:fix`      | Auto-fix style           |
+| `npm run format`        | Format code              |
+| `npm run format:check`  | Check formatting         |
 
 ## Configuration Files
 
@@ -262,6 +267,7 @@ git commit -m "refactor: simplify counter logic"
 ```
 
 **Valid types:**
+
 - `feat` - New feature
 - `fix` - Bug fix
 - `docs` - Documentation
@@ -275,6 +281,7 @@ git commit -m "refactor: simplify counter logic"
 ### Pre-commit Checks
 
 Husky runs automatically:
+
 - **Pre-commit**: Lints and formats staged files
 - **Commit-msg**: Validates commit message format
 

@@ -1,44 +1,28 @@
-import js from '@eslint/js'
+import { FlatCompat } from '@eslint/eslintrc'
 import prettier from 'eslint-config-prettier'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const compat = new FlatCompat({
+	baseDirectory: __dirname,
+	resolvePluginsRelativeTo: __dirname
+})
 
 export default [
-	js.configs.recommended,
-	prettier,
+	...compat.extends('next', 'next/core-web-vitals', 'prettier'),
 	{
+		files: ['**/*.{js,jsx,ts,tsx}'],
 		languageOptions: {
-			ecmaVersion: 2024,
-			sourceType: 'module',
 			parserOptions: {
-				ecmaFeatures: {
-					jsx: true
-				},
-				impliedStrict: true
-			},
-			globals: {
-				// Browser globals
-				window: 'readonly',
-				document: 'readonly',
-				navigator: 'readonly',
-				console: 'readonly',
-				fetch: 'readonly',
-				URL: 'readonly',
-				URLSearchParams: 'readonly',
-				IntersectionObserver: 'readonly',
-				setTimeout: 'readonly',
-				clearTimeout: 'readonly',
-				setInterval: 'readonly',
-				clearInterval: 'readonly',
-				React: 'readonly',
-				JSX: 'readonly',
-				// Node globals
-				process: 'readonly',
-				global: 'readonly',
-				Buffer: 'readonly',
-				__dirname: 'readonly',
-				__filename: 'readonly'
+				ecmaVersion: 2024,
+				sourceType: 'module'
 			}
 		},
 		rules: {
+			'no-console': 'off',
 			'no-unused-vars': [
 				'error',
 				{
@@ -47,49 +31,43 @@ export default [
 					destructuredArrayIgnorePattern: '^_'
 				}
 			],
-			'no-console': 'off',
-			'prefer-const': 'error',
-			'no-var': 'error'
+			'prefer-const': 'error'
 		}
 	},
 	{
-		files: ['**/*.test.js', '**/*.spec.js', 'src/test/**'],
+		files: ['tests/**/*.{test,spec}.{js,jsx,ts,tsx}'],
 		rules: {
 			'no-unused-vars': 'off'
 		}
 	},
 	{
 		ignores: [
-			// Build outputs
 			'.next/',
+			'coverage/',
 			'out/',
 			'dist/',
 			'build/',
 			'package/',
-			// Dependencies
 			'node_modules/',
-			// Environment
 			'.env',
 			'.env.*',
-			// IDE
 			'.vscode/',
 			'.idea/',
 			'.hive-mind/',
-			// OS
-			'.DS_Store',
-			// Logs
+			'.claude/',
+			'.claude-flow/',
 			'*.log',
-			'npm-debug.log*',
-			'yarn-debug.log*',
-			'yarn-error.log*',
-			// Database
 			'*.db',
 			'*.db-shm',
 			'*.db-wal',
-			// Config & test files
-			'*.config.js',
-			'tests/',
 			'playwright.config.js'
 		]
-	}
+	},
+	{
+		files: ['**/*.config.js', 'commitlint.config.js', 'postcss.config.js', 'tailwind.config.js'],
+		rules: {
+			'import/no-anonymous-default-export': 'off'
+		}
+	},
+	prettier
 ]

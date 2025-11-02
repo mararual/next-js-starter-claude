@@ -20,8 +20,7 @@ const features = [
 	{
 		emoji: '⚡',
 		title: 'Modern Stack',
-		description:
-			'Next.js 15, React 19, Tailwind CSS 4. TypeScript strict mode, ESLint, Prettier.',
+		description: 'Next.js 15, React 19, Tailwind CSS 4. TypeScript strict mode, ESLint, Prettier.',
 		borderColor: 'pink' as const
 	},
 	{
@@ -34,8 +33,7 @@ const features = [
 	{
 		emoji: '🚀',
 		title: 'Vercel Ready',
-		description:
-			'GitHub Actions CI/CD pipeline. Automatic preview deployments. Production ready.',
+		description: 'GitHub Actions CI/CD pipeline. Automatic preview deployments. Production ready.',
 		borderColor: 'indigo' as const
 	},
 	{
@@ -102,14 +100,17 @@ export default function Home() {
 					{/* Description */}
 					<section className="text-lg text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
 						<p>
-							A modern Next.js 15 starter with React 19, Tailwind CSS 4, and comprehensive
-							testing setup. Includes BDD/ATDD/TDD workflow, GitHub Actions CI/CD, and
-							automatic Vercel deployment with trunk-based development.
+							A modern Next.js 15 starter with React 19, Tailwind CSS 4, and comprehensive testing
+							setup. Includes BDD/ATDD/TDD workflow, GitHub Actions CI/CD, and automatic Vercel
+							deployment with trunk-based development.
 						</p>
 					</section>
 
 					{/* CTA Buttons */}
-					<nav className="flex flex-col sm:flex-row gap-4 justify-center mb-16" aria-label="Main navigation">
+					<nav
+						className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+						aria-label="Main navigation"
+					>
 						<a
 							href="/docs"
 							className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg"
@@ -127,8 +128,11 @@ export default function Home() {
 					</nav>
 
 					{/* Features Grid */}
-					<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" aria-label="Features">
-						{features.map((feature) => (
+					<section
+						className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+						aria-label="Features"
+					>
+						{features.map(feature => (
 							<FeatureCard
 								key={feature.title}
 								emoji={feature.emoji}
@@ -143,7 +147,7 @@ export default function Home() {
 					<section className="mb-12">
 						<h2 className="text-2xl font-bold text-white mb-8">Tech Stack</h2>
 						<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-							{techStack.map((tech) => (
+							{techStack.map(tech => (
 								<TechBadge key={tech} name={tech} />
 							))}
 						</div>
@@ -153,7 +157,7 @@ export default function Home() {
 					<section className="border-t border-slate-700 pt-12">
 						<h2 className="text-2xl font-bold text-white mb-8">Get Started</h2>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-							{quickStartItems.map((item) => (
+							{quickStartItems.map(item => (
 								<QuickStartCard
 									key={item.title}
 									title={item.title}
@@ -169,10 +173,7 @@ export default function Home() {
 					<footer className="border-t border-slate-700 mt-12 pt-8 text-slate-400 text-sm">
 						<p>
 							Built with ❤️ for modern development workflows. See{' '}
-							<a
-								href="/docs"
-								className="text-purple-400 hover:text-purple-300 transition-colors"
-							>
+							<a href="/docs" className="text-purple-400 hover:text-purple-300 transition-colors">
 								documentation
 							</a>{' '}
 							for guides and examples.

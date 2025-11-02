@@ -16,17 +16,9 @@ export const metadata: Metadata = {
 		default: 'Next.js Starter Template',
 		template: '%s | Next.js Starter'
 	},
-	description: 'A clean Next.js starter with BDD/ATDD/TDD development flow, TypeScript strict mode, and comprehensive testing',
-	keywords: [
-		'Next.js',
-		'React',
-		'TypeScript',
-		'TDD',
-		'BDD',
-		'ATDD',
-		'Tailwind CSS',
-		'Testing'
-	],
+	description:
+		'A clean Next.js starter with BDD/ATDD/TDD development flow, TypeScript strict mode, and comprehensive testing',
+	keywords: ['Next.js', 'React', 'TypeScript', 'TDD', 'BDD', 'ATDD', 'Tailwind CSS', 'Testing'],
 	authors: [{ name: 'Your Team' }],
 	creator: 'Your Team',
 	openGraph: {

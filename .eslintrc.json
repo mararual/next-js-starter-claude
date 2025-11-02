@@ -1,16 +1,51 @@
 {
-	"extends": [
-		"next/core-web-vitals",
-		"prettier"
+	"extends": ["next/core-web-vitals", "prettier"],
+	"env": {
+		"browser": true,
+		"es2024": true,
+		"node": true
+	},
+	"ignorePatterns": [
+		".next/",
+		"out/",
+		"dist/",
+		"build/",
+		"package/",
+		"node_modules/",
+		".env",
+		".env.*",
+		".vscode/",
+		".idea/",
+		".hive-mind/",
+		".claude/",
+		".claude-flow/",
+		"*.log",
+		"*.db",
+		"*.db-shm",
+		"*.db-wal",
+		"playwright.config.js"
+	],
+	"overrides": [
+		{
+			"files": ["tests/**/*.{test,spec}.{js,jsx,ts,tsx}"],
+			"rules": {
+				"no-unused-vars": "off"
+			}
+		}
 	],
 	"rules": {
-		"react/react-in-jsx-scope": "off",
+		"@next/next/no-html-link-for-pages": "off",
+		"no-console": "off",
+		"no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_",
+				"destructuredArrayIgnorePattern": "^_"
+			}
+		],
+		"prefer-const": "error",
 		"react/prop-types": "off",
-		"@next/next/no-html-link-for-pages": "off"
-	},
-	"env": {
-		"node": true,
-		"browser": true,
-		"es2024": true
+		"react/react-in-jsx-scope": "off"
 	}
 }

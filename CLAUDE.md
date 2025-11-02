@@ -208,6 +208,7 @@ This project uses specialized expert agents to ensure quality at each stage of d
 ```
 
 **Key Responsibilities:**
+
 - ✅ Zero tolerance for `any` types
 - ✅ Schema-first for external data
 - ✅ Immutable data patterns

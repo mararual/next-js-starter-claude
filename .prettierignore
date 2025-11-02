@@ -3,6 +3,11 @@ node_modules
 dist
 build
 coverage
+.claude
+.claude-flow
+.hive-mind
+playwright-report
+test-results
 *.log
 .env
 .env.local
