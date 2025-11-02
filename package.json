@@ -1,6 +1,6 @@
 {
 	"name": "nextjs-starter-claude",
-	"version": "1.0.0",
+	"version": "1.7.0",
 	"description": "Next.js starter template with BDD/ATDD/TDD development flow",
 	"private": true,
 	"type": "module",

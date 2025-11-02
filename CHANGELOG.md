@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.7.0](https://github.com/mararual/next-js-starter-claude/compare/nextjs-starter-claude-v1.6.2...nextjs-starter-claude-v1.7.0) (2025-11-02)
+
+
+### Features
+
+* Initial Next.js starter template with latest versions ([dfc379e](https://github.com/mararual/next-js-starter-claude/commit/dfc379e62a3d9b071c4e7db8fe34e9bf381b4e30))
+* TypeScript migration and Next.js best practices implementation ([be82326](https://github.com/mararual/next-js-starter-claude/commit/be823269a3d18c355829e6d36a1ba7fdf83d53a4))
+
+
+### Bug Fixes
+
+* ensure prod build uses prod target ([420182a](https://github.com/mararual/next-js-starter-claude/commit/420182a9029a7df7e729ff5c585b6095e05372b8))
+
+
+### Documentation
+
+* Update CLAUDE.md to reflect TypeScript usage ([de662e8](https://github.com/mararual/next-js-starter-claude/commit/de662e883e757f0894f74ffcefae462e0e2131c5))
+
+
+### Tests
+
+* add landing page coverage ([9c9dbda](https://github.com/mararual/next-js-starter-claude/commit/9c9dbdab33aa3d04d050fb1e5a43d1e7099bebd7))
+
 ## [1.6.2](https://github.com/bdfinst/interactive-cd/compare/interactive-cd-v1.6.1...interactive-cd-v1.6.2) (2025-10-30)
 
 ### Bug Fixes
